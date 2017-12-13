@@ -29,24 +29,26 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
-       #@product.categories.update(category_params)
-      redirect_to products_path, notice: "El producto ha sido modificado con éxito"
-    else
-      render :edit
+    respond_to do |format|
+      if @product.update_attributes(product_params)
+        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.json { render :show, status: :ok, location: @product }
+      else
+        format.html { render :edit }
+        format.json { render json: @product.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
-    product.destroy
+    @product.destroy
 
     redirect_to products_path, notice: "El producto fue eliminado con éxito"
   end
 
   private
     def product_params
-      #params.require(:product).permit(:name, :price, category_ids: [])
-      params.require(:product).permit(:name, :price)
+       params.require(:product).permit(:name, :price, {category_ids: []})
     end
 
     def category_params

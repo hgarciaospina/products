@@ -10,7 +10,7 @@
 #
 
 class Product < ApplicationRecord
-	has_many :has_categories
+	has_many :has_categories, dependent: :destroy
 	has_many :categories, through: :has_categories
 
 	validates :name, presence: true

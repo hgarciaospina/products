@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <h1>Products</h1>
+      <div>
+        <%=  link_to "Nuevo Producto", new_product_path, :method => :get, class: "btn btn-primary pull-right" %>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categorias</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @products.each do |product| %>
+          <tr>
+            <th scope="row"><%= product.name %></th>
+            <td><%= product.price %></td>
+              <% if !product.categories.nil? %>
+                  <td> <%= product.categories.map(&:name).join(', ') %> </td>
+              <% end %>
+            <td>
+              <%= link_to "<span class='glyphicon glyphicon-pencil'></span>".html_safe, edit_product_path(product) %>
+              <%= link_to "<span class='glyphicon glyphicon-trash'></span>".html_safe,  product,  method: :delete, data: { confirm: "¿Estás seguro de eliminar este producto?" } %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
