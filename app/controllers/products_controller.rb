@@ -24,6 +24,8 @@ class ProductsController < ApplicationController
   end
 
   def edit
+   @all_categories = Category.all
+   @categories = find_categories
   end
 
   def update
@@ -54,5 +56,9 @@ class ProductsController < ApplicationController
     def find_product
 			@product = Product.find(params[:id])
 		end
+
+    def find_categories
+      @product.categories
+    end
 
 end
