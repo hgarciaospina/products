@@ -25,7 +25,7 @@
                  <% unless @categories.nil? %>
                    <% @categories.each do |category| %>
                       <div class="field">
-                        <%= check_box_tag "category_ids[]", category.id, value="yes"%> <%= category.name %>
+                        <%= check_box_tag "category_ids[]", category.id %> <%= category.name %>
                       </div>
                    <% end %>
                <% end %>
