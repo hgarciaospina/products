@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
           redirect_to products_path, notice: 'El producto fue publicado exitosamente'
      else
       render :new
-      end
+     end
     end
 
   def show
@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    product.destroy
+    @product.destroy
 
     redirect_to products_path, notice: "El producto fue eliminado con éxito"
   end

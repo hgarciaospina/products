@@ -22,13 +22,15 @@
                  <%= f.number_field :price, class: 'text_field', step: 0.01, class: "form-control input-lg", placeholder: "Precio del producto" %>
                </div>
                <div class="field">
-                 <% unless @categories.nil? %>
-                   <% @categories.each do |category| %>
                       <div class="field">
-                        <%= check_box_tag "category_ids[]", category.id %> <%= category.name %>
-                      </div>
-                   <% end %>
-               <% end %>
+                        <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name, {}, {multiple: true}) do |ds| %>
+                               <%= ds.label(class:"container") do %>
+                                 &nbsp;&nbsp;&nbsp;<%= ds.check_box %>
+                                 <%= ds.object.name %>
+                                  <span class="chekmark"></span>
+                               <% end %>
+                        <% end %>
+                  </div>
                </div>
                <div>
                  <%= f.submit form_title, class: "btn btn-primary btn-lg btn-block" %>

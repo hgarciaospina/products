@@ -18,7 +18,7 @@
           <% @products.each do |product| %>
           <tr>
             <th scope="row"><%= product.name %></th>
-            <td><%= product.price %></td>
+            <td class="text-right"><%= number_to_currency(product.price) %></td>
               <% if !product.categories.nil? %>
                   <td> <%= product.categories.map(&:name).join(', ') %> </td>
               <% end %>
