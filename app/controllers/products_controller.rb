@@ -13,7 +13,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.categories = category_params
+    @product.categories = find_categories
      if @product.save
           redirect_to products_path, notice: 'El producto fue publicado exitosamente'
      else
@@ -46,11 +46,7 @@ class ProductsController < ApplicationController
 
   private
     def product_params
-      params.require(:product).permit(:name, :price)
-    end
-
-    def category_params
-      params.require(:category_ids)
+      params.require(:product).permit(:name, :price, category_ids:[])
     end
 
     def find_product
